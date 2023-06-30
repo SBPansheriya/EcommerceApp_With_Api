@@ -1,6 +1,6 @@
-package com.example.post_registerandloginapp;
+package com.example.post_registerandloginapp.Modals;
 
-public class Modal_Class {
+public class RegisterData {
 
     private Integer connection;
 
@@ -24,6 +24,7 @@ public class Modal_Class {
 
     @Override
     public String toString() {
+
         return "Example{" +
                 "connection=" + connection +
                 ", result=" + result +
