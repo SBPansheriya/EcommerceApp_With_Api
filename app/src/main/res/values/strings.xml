@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Post_RegisterandLoginApp</string>
+    <string name="open_drawer">Open_Drawer</string>
+    <string name="close_drawer">Close_Drawer</string>
 </resources>
