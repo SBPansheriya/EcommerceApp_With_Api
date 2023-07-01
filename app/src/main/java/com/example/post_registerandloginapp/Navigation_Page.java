@@ -52,17 +52,19 @@ public class Navigation_Page extends AppCompatActivity {
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(Navigation_Page.this,binding.drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
         binding.drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
-        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if(item.getItemId() == R.id.imageView1){
-                    System.out.println("1234");
-                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(takePicture, CAMERA_REQUEST);
-                }
-                return true;
-            }
-        });
+
+
+//        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                if(item.getItemId() == R.id.imageView1){
+//                    System.out.println("1234");
+//                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    startActivityForResult(takePicture, CAMERA_REQUEST);
+//                }
+//                return true;
+//            }
+//        });
 //        loadImageFromStorage(imagepath,imageView);
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

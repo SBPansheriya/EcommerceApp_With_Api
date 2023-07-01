@@ -36,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
 //        password = findViewById(R.id.password);
 //        signin = findViewById(R.id.signin);
 
+
+
         binding.signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
