@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".View_Adapter">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2.4"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:background="#BAB4A5">
+
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/viwe_image"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="0.8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        android:background="#BAB4A5">
+        <TextView
+            android:id="@+id/pname1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="aaa"
+            android:gravity="center|left"
+            android:layout_marginLeft="15dp"
+            android:textSize="35dp"/>
+
+        <TextView
+            android:id="@+id/pprice1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="aaa"
+            android:gravity="center|left"
+            android:layout_marginLeft="15dp"
+            android:textSize="35dp"/>
+        <TextView
+            android:id="@+id/pdes1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="aaa"
+            android:gravity="center|left"
+            android:layout_marginLeft="15dp"
+            android:textSize="35dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="2.7"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:orientation="vertical"
+        android:background="#BAB4A5">
+        <ImageView
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/baseline_more_vert_24"
+            android:scaleX="5"
+            android:scaleY="9"
+            android:id="@+id/moreverts"/>
+    </LinearLayout>
+
+</LinearLayout>

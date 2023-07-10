@@ -1,7 +1,11 @@
 package com.example.post_registerandloginapp;
 
-import com.example.post_registerandloginapp.Modals.LoginData;
-import com.example.post_registerandloginapp.Modals.RegisterData;
+import android.text.Editable;
+
+import com.example.post_registerandloginapp.Modal.AddProductData;
+import com.example.post_registerandloginapp.Modal.Login_Data;
+import com.example.post_registerandloginapp.Modal.RegisterData;
+import com.example.post_registerandloginapp.Modal.ViewProductData;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -13,6 +17,21 @@ public interface Interface_Class {
     Call<RegisterData> registerUser(@Field("Name") String name, @Field("Email") String email, @Field("Password") String password);
 
     @FormUrlEncoded
-    @POST("Login.php")
-    Call<LoginData> loginUser(@Field("Email") String email, @Field("Password") String password);
+    @POST("login.php")
+    Call<Login_Data> loginUser(@Field("email") String email, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST("addProduct.php")
+    Call<AddProductData> addProductUser(@Field("userid") int userid, @Field("pname") String pname, @Field("pprize") Editable pprize, @Field("pdes") String pdes, @Field("productimage") String imagedata);
+
+    @FormUrlEncoded
+    @POST("viewProduct.php")
+    Call<ViewProductData> viewProductUser(@Field("userid") int userid);
+
+    @FormUrlEncoded
+    @POST("updateproduct.php")
+    Call<RegisterData> updateProductUser(@Field("id") int id, @Field("name") String name, @Field("price") Editable prize,
+                     @Field("description") String description, @Field("imagedata") String imagedata,@Field("imagename") String imagename);
+
 }
+

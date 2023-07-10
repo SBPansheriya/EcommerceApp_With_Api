@@ -1,29 +1,20 @@
 package com.example.post_registerandloginapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.post_registerandloginapp.Modals.LoginData;
-import com.example.post_registerandloginapp.Modals.RegisterData;
 import com.example.post_registerandloginapp.databinding.ActivityMainBinding;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView name,email,password;
     ActivityMainBinding binding;
-    Button signin;
+    View_Adapter adapter;
+    RecyclerView recyclerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,63 +22,91 @@ public class MainActivity extends AppCompatActivity {
         View view = binding.getRoot();
         setContentView(view);
 
-//        name = findViewById(R.id.name);
-//        email = findViewById(R.id.email);
-//        password = findViewById(R.id.password);
-//        signin = findViewById(R.id.signin);
+//        Log.d("VVV", "onCreate: id"+sharedPreferences.getInt("uid",4));
+//        InstanceClass.CallApi().viewProductUser(sharedPreferences.getInt("uid",4)).enqueue(new Callback<ViewProductData>() {
+//            @Override
+//            public void onResponse(Call<ViewProductData> call, Response<ViewProductData> response) {
+//                if(response.body().getConnection()==1){
+//                    if(response.body().getResult()==1){
+//                        Log.d("TTTT", "onResponse: product data  = "+response.body().getProductdata());
+//                    }else {
+//                        Log.d("TTTT", "onResponse: responce result not ");
+//                    }
+//                }else
+//                {
+//                    Log.d("TTTT", "onResponse: connection error");
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<ViewProductData> call, Throwable t) {
+//                Log.e("TTTT", "onFailure: "+t.getLocalizedMessage() );
+//            }
+//        });
 
-
-
-        binding.signin.setOnClickListener(new View.OnClickListener() {
+        binding.toppickes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                InstanceClass.CallApi().registerUser(binding.name.getText().toString(),binding.email.getText().toString(),binding.password.getText().toString()).enqueue(new Callback<RegisterData>() {
-                    @Override
-                    public void onResponse(Call<RegisterData> call, Response<RegisterData> response) {
-
-                        if (response.body().getResult() == 1) {
-                            if (response.body().getResult() == 1) {
-                                Log.d("TTT", "onResponse: " + response.body().getConnection());
-                                Toast.makeText(MainActivity.this, "Register Sucessfuly", Toast.LENGTH_SHORT).show();
-                            } else {
-                                Log.d("TTT", "onResponse: "+response.body().getConnection());
-                            }
-                        }else {
-                            Toast.makeText(MainActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                    @Override
-                    public void onFailure(Call<RegisterData> call, Throwable t) {
-                        Log.e("TTT", "onFailure: "+t.getLocalizedMessage());
-                    }
-                });
-
-                Intent intent = new Intent(MainActivity.this, Navigation_Page.class);
+                Intent intent  =new Intent(MainActivity.this, Top_Picks.class);
                 startActivity(intent);
             }
         });
 
-//        InstanceClass.CallApi().loginUser(binding.email.getText().toString(),binding.password.getText().toString()).enqueue(new Callback<LoginData>() {
-//            @Override
-//            public void onResponse(Call<LoginData> call, Response<LoginData> response) {
+        binding.categories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent  =new Intent(MainActivity.this,Categories_Class.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.myaccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, MyAccount_Class.class);
+                startActivity(intent);
+            }
+        });
+
+        binding.addproduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Add_Product_Class.class);
+                startActivity(intent);
+            }
+        });
+    }
+}
+
+
+
+
+
+//        Toolbar toolbar = binding.appAndTool.toolbar;
+//        setSupportActionBar(toolbar);
 //
-//                if (response.body().getResult() == 1) {
-//                    if (response.body().getResult() == 1) {
-//                        Log.d("TTT", "onResponse: " + response.body().getConnection());
-//                        Toast.makeText(MainActivity.this, "Register Sucessfuly", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Log.d("TTT", "onResponse: "+response.body().getConnection());
-//                    }
-//                }else {
-//                    Toast.makeText(MainActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
-//
-//                }
-//            }
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(MainActivity.this,binding.drawerLayout,toolbar,R.string.open_drawer,R.string.close_drawer);
+//        binding.drawerLayout.addDrawerListener(toggle);
+//        toggle.syncState();
+//        View headerView = binding.navView.getHeaderView(0);
+//        profileImage=headerView.findViewById(R.id.imageView1);
+//        profileImage.setOnClickListener(new View.OnClickListener() {
 //            @Override
-//            public void onFailure(Call<LoginData> call, Throwable t) {
-//                Log.e("TTT", "onFailure: "+t.getLocalizedMessage());
+//            public void onClick(View v) {
+//                Log.d("RRR", "onClick: image view Clicked");
+//                Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                startActivityForResult(takePicture, CAMERA_REQUEST);
 //            }
 //        });
 
-    }
-}
+//        binding.navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                if(item.getItemId() == R.id.imageView1){
+//                    System.out.println("1234");
+//                    Intent takePicture = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                    startActivityForResult(takePicture, CAMERA_REQUEST);
+//                }
+//                return true;
+//            }
+//        });
+//        loadImageFromStorage(imagepath,imageView);

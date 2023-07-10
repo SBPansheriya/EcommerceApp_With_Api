@@ -2,7 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:allowBackup="true"
@@ -15,11 +22,31 @@
         android:theme="@style/Theme.Post_RegisterandLoginApp"
         tools:targetApi="31">
         <activity
-            android:name=".Navigation_Page"
+            android:name=".Top_Picks"
             android:exported="false" />
         <activity
+            android:name=".View_Adapter"
+            android:exported="false" />
+        <activity
+            android:name=".Add_Product_Class"
+            android:exported="false" />
+        <activity
+            android:name=".MyAccount_Class"
+            android:exported="false" />
+        <activity
+            android:name=".Categories_Class"
+            android:exported="false" /> <!-- <activity -->
+        <!-- android:name=".Fragments.Navigation_Page" -->
+        <!-- android:exported="false" /> -->
+        <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
+        <activity
+            android:name=".LogIn_Page"
+            android:exported="true" />
+        <activity
+            android:name=".SignIn_Page"
+            android:exported="true" />
         <activity
             android:name=".Splash_Image"
             android:exported="true">
@@ -29,6 +56,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
