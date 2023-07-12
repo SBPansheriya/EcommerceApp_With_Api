@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.transition.Visibility;
 import android.view.View;
 
 import com.example.post_registerandloginapp.databinding.ActivityMainBinding;
@@ -21,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+
 
 //        Log.d("VVV", "onCreate: id"+sharedPreferences.getInt("uid",4));
 //        InstanceClass.CallApi().viewProductUser(sharedPreferences.getInt("uid",4)).enqueue(new Callback<ViewProductData>() {
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Add_Product_Class.class);
+                intent.putExtra("button","add");
                 startActivity(intent);
             }
         });

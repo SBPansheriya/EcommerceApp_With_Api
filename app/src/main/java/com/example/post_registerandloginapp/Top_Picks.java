@@ -40,14 +40,13 @@ public class Top_Picks extends AppCompatActivity {
                     }else {
                         Log.d("TTTT", "onResponse: responce result not ");
                     }
-                }else
-                {
+                }else {
                     Log.d("TTTT", "onResponse: connection error");
                 }
             }
             @Override
             public void onFailure(Call<ViewProductData> call, Throwable t) {
-
+                Log.e("TTTT", "onFailure: "+t.getLocalizedMessage() );
             }
         });
     }

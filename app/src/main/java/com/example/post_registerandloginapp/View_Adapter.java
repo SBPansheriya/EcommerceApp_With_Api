@@ -3,7 +3,10 @@ package com.example.post_registerandloginapp;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.post_registerandloginapp.Modal.AddProductData;
 import com.example.post_registerandloginapp.Modal.Productdatum;
 
 import java.util.List;
@@ -36,7 +40,7 @@ public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder>
     }
 
     @Override
-    public void onBindViewHolder(@NonNull View_Adapter.view_holder holder, int position) {
+    public void onBindViewHolder(@NonNull View_Adapter.view_holder holder, @SuppressLint("RecyclerView") int position) {
         holder.pname.setText(""+productdata.get(position).getProName());
         holder.pprise.setText(""+productdata.get(position).getProPrice());
         holder.pdes.setText(""+productdata.get(position).getProDes());
@@ -49,13 +53,21 @@ public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder>
         holder.morevert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("TTT", "onClick: 123234");
                 PopupMenu popupMenu = new PopupMenu(context,v);
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu,popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getItemId()==R.id.update){
-
+                            Intent intent = new Intent(context, Add_Product_Class.class);
+                            intent.putExtra("button","update");
+                            intent.putExtra("id",productdata.get(position).getId());
+                            intent.putExtra("name",productdata.get(position).getProName());
+                            intent.putExtra("price",productdata.get(position).getProPrice());
+                            intent.putExtra("des",productdata.get(position).getProDes());
+                            intent.putExtra("image",productdata.get(position).getProImage());
+                            context.startActivity(intent);
                         }
                         if(item.getItemId()==R.id.delete){
 
@@ -63,6 +75,7 @@ public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder>
                         return true;
                     }
                 });
+                popupMenu.show();
             }
         });
     }
