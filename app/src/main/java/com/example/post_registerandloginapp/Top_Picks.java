@@ -26,7 +26,7 @@ public class Top_Picks extends AppCompatActivity {
         setContentView(R.layout.activity_top_picks);
         recyclerView = findViewById(R.id.productrecyclerview);
 
-        InstanceClass.CallApi().viewProductUser(sharedPreferences.getInt("uid",4)).enqueue(new Callback<ViewProductData>() {
+        InstanceClass.CallApi().viewProductUser(sharedPreferences.getInt("uid",0)).enqueue(new Callback<ViewProductData>() {
             @Override
             public void onResponse(Call<ViewProductData> call, Response<ViewProductData> response) {
                 if(response.body().getConnection()==1){

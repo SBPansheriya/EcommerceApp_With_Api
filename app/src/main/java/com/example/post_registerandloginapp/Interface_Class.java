@@ -31,11 +31,11 @@ public interface Interface_Class {
     @FormUrlEncoded
     @POST("updateproduct.php")
     Call<RegisterData> updateProductUser(@Field("id") int id, @Field("name") String name, @Field("price") Editable prize,
-                     @Field("description") String description, @Field("imagedata") String imagedata);
+                     @Field("description") String description, @Field("imagedata") String imagedata,@Field("imagename") String imagename);
 
     @FormUrlEncoded
     @POST("deleteproduct.php")
-    Call<RegisterData> deleteProductUser(@Field("id") int userid);
+    Call<RegisterData> deleteProductUser(@Field("id") int id);
 
 }
 

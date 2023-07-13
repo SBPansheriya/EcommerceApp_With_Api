@@ -1,10 +1,12 @@
 package com.example.post_registerandloginapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +16,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.post_registerandloginapp.Modal.AddProductData;
 import com.example.post_registerandloginapp.Modal.Productdatum;
+import com.example.post_registerandloginapp.Modal.RegisterData;
 
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder> {
 
@@ -70,7 +78,48 @@ public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder>
                             context.startActivity(intent);
                         }
                         if(item.getItemId()==R.id.delete){
+                            AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                            builder.setTitle("DELETE...");
+                            builder.setMessage("Are You Sure?");
+                            builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    InstanceClass.CallApi().deleteProductUser(Integer.valueOf(productdata.get(position).getId())).enqueue(new Callback<RegisterData>() {
+                                        @Override
+                                        public void onResponse(Call<RegisterData> call, Response<RegisterData> response) {
+                                            if (response.body().getConnection()==1)
+                                            {
+                                                if (response.body().getResult()==1)
+                                                {
+                                                    Log.d("JJJ", "onResponse: Delete");
+                                                    Toast.makeText(context, "Product Deleted", Toast.LENGTH_LONG).show();
+                                                }
+                                                else {
+                                                    Toast.makeText(context, "Product Not Deleted", Toast.LENGTH_LONG).show();
+                                                }
+                                            }
+                                            else
+                                            {
+                                                Toast.makeText(context, "Somthin Went Wrong", Toast.LENGTH_LONG).show();
+                                            }
+                                        }
 
+                                        @Override
+                                        public void onFailure(Call<RegisterData> call, Throwable t) {
+                                            Log.e("JJJ", "onFailure: "+t.getLocalizedMessage() );
+                                        }
+                                    });
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    dialogInterface.dismiss();
+                                }
+                            });
+                            AlertDialog alert = builder.create();
+                            alert.show();
                         }
                         return true;
                     }

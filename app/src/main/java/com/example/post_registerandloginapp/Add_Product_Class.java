@@ -56,10 +56,10 @@ public class Add_Product_Class extends AppCompatActivity {
             binding.productname.setText(""+name);
             binding.productprice.setText(""+price);
             binding.discription.setText(""+des);
-//            Glide.with(Add_Product_Class.this)
-//                    .load("https://shreyecommerce.000webhostapp.com/MySite/"+productdata.get(id).getProImage())
-//                    .centerCrop()
-//                    .into(binding.addimage);
+            Glide.with(Add_Product_Class.this)
+                    .load("https://shreyecommerce.000webhostapp.com/MySite/"+imagename)
+                    .centerCrop()
+                    .into(binding.addimage);
             button = getIntent().getStringExtra("button");
         }
         button = getIntent().getStringExtra("button");
@@ -132,17 +132,19 @@ public class Add_Product_Class extends AppCompatActivity {
                     imagedata = Base64.getEncoder().encodeToString(byteArray);
                 }
 
-                InstanceClass.CallApi().updateProductUser(sharedPreferences.getInt("uid",0),binding.productname.getText().toString(),binding.productprice.getText(),binding.discription.getText().toString(),imagedata).enqueue(new Callback<RegisterData>() {
+                InstanceClass.CallApi().updateProductUser(id,binding.productname.getText().toString(),binding.productprice.getText(),binding.discription.getText().toString(),imagedata,imagename).enqueue(new Callback<RegisterData>() {
                     @Override
                     public void onResponse(Call<RegisterData> call, Response<RegisterData> response) {
                         if (response.body().getConnection() == 1) {
                             if (response.body().getResult() == 1) {
                                 Intent intent = new Intent(Add_Product_Class.this, Top_Picks.class);
                                 startActivity(intent);
-                                Toast.makeText(Add_Product_Class.this, "Item Added Successfully", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Add_Product_Class.this, "Item Updated Successfully", Toast.LENGTH_LONG).show();
+                                Log.d("OOO", "onResponse: update");
                             }
                             else {
-                                Toast.makeText(Add_Product_Class.this, "Item Not Added", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Add_Product_Class.this, "Item Not Updated", Toast.LENGTH_LONG).show();
+                                Log.d("OOO", "onResponse: updatenot");
                             }
                         }
                         else {
@@ -152,7 +154,7 @@ public class Add_Product_Class extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<RegisterData> call, Throwable t) {
-                        Log.e("TTT", "onFailure: "+t.getLocalizedMessage() );
+                        Log.e("OOO", "onFailure: "+t.getLocalizedMessage() );
                     }
                 });
             }
