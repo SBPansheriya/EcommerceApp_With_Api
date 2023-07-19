@@ -18,15 +18,15 @@ public class Categories_Class extends AppCompatActivity {
     Fragment_Adapter adapter;
     ViewPager viewPager;
     TabLayout tabLayout;
-    GridView gridView;
-    ListView listView;
-    Recyclerview_Adapter gridViewAdapter;
-    ListView_Adapter listViewAdapter;
-    String listcategory[] = {"Top Categories","Women","Men"};
-    String gridcategory[] = {"Kurtas","Sarees","Polos & Tees","Ethnic Gowns","Headphones & Headsets","Casual Shirts","Smart Watches",
-    "Lenhenga Choils","Kitchen Strorage","Dresses","Jeans & Jeggings","Jeans","Track Pants","Nightwear","Sports Shoes & Sneakers"};
-    int image[] = {R.drawable.kurtas,R.drawable.sarees,R.drawable.polos_tees,R.drawable.ethnic_gowns,R.drawable.headphones,R.drawable.casual_shirts,R.drawable.smart_watches,
-            R.drawable.lenhenga_choils,R.drawable.kitchen_strorage,R.drawable.dresses,R.drawable.jeans_jeggings,R.drawable.jeans,R.drawable.track_pants,R.drawable.nightwear,R.drawable.sports_shoes_sneakers};
+//    GridView gridView;
+//    ListView listView;
+//    Recyclerview_Adapter gridViewAdapter;
+//    ListView_Adapter listViewAdapter;
+//    String listcategory[] = {"Top Categories","Women","Men"};
+//    String gridcategory[] = {"Kurtas","Sarees","Polos & Tees","Ethnic Gowns","Headphones & Headsets","Casual Shirts","Smart Watches",
+//    "Lenhenga Choils","Kitchen Strorage","Dresses","Jeans & Jeggings","Jeans","Track Pants","Nightwear","Sports Shoes & Sneakers"};
+//    int image[] = {R.drawable.kurtas,R.drawable.sarees,R.drawable.polos_tees,R.drawable.ethnic_gowns,R.drawable.headphones,R.drawable.casual_shirts,R.drawable.smart_watches,
+//            R.drawable.lenhenga_choils,R.drawable.kitchen_strorage,R.drawable.dresses,R.drawable.jeans_jeggings,R.drawable.jeans,R.drawable.track_pants,R.drawable.nightwear,R.drawable.sports_shoes_sneakers};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

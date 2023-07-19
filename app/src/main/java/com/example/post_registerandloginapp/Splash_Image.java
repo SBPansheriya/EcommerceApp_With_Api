@@ -22,14 +22,14 @@ public class Splash_Image extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash_image);
-        imageView = findViewById(R.id.splash);
+//        imageView = findViewById(R.id.splash);
 
         sharedPreferences = getSharedPreferences("myperf",MODE_PRIVATE);
         editor=sharedPreferences.edit();
         login = sharedPreferences.getInt("login",0);
 
-        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
-        imageView.setAnimation(animation);
+//        Animation animation = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.zoom_in);
+//        imageView.setAnimation(animation);
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -46,6 +46,6 @@ public class Splash_Image extends AppCompatActivity {
             }
         };
         Handler handler = new Handler();
-        handler.postDelayed(runnable,1000);
+        handler.postDelayed(runnable,5000);
     }
 }

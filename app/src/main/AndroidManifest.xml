@@ -48,6 +48,9 @@
             android:name=".SignIn_Page"
             android:exported="true" />
         <activity
+            android:name=".PaymentActivity"
+            android:exported="false" />
+        <activity
             android:name=".Splash_Image"
             android:exported="true">
             <intent-filter>

@@ -1,7 +1,5 @@
 package com.example.post_registerandloginapp;
 
-import android.text.Editable;
-
 import com.example.post_registerandloginapp.Modal.AddProductData;
 import com.example.post_registerandloginapp.Modal.Login_Data;
 import com.example.post_registerandloginapp.Modal.RegisterData;
@@ -22,7 +20,7 @@ public interface Interface_Class {
 
     @FormUrlEncoded
     @POST("addProduct.php")
-    Call<AddProductData> addProductUser(@Field("userid") int userid, @Field("pname") String pname, @Field("pprize") Editable pprize, @Field("pdes") String pdes, @Field("productimage") String imagedata);
+    Call<AddProductData> addProductUser(@Field("userid") int userid, @Field("pname") String pname, @Field("pprize") String pprize, @Field("pdes") String pdes, @Field("productimage") String imagedata);
 
     @FormUrlEncoded
     @POST("viewProduct.php")
@@ -30,7 +28,7 @@ public interface Interface_Class {
 
     @FormUrlEncoded
     @POST("updateproduct.php")
-    Call<RegisterData> updateProductUser(@Field("id") int id, @Field("name") String name, @Field("price") Editable prize,
+    Call<RegisterData> updateProductUser(@Field("id") int id, @Field("name") String name, @Field("price") String prize,
                      @Field("description") String description, @Field("imagedata") String imagedata,@Field("imagename") String imagename);
 
     @FormUrlEncoded

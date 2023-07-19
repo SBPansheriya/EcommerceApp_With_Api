@@ -29,21 +29,19 @@ public class Top_Picks extends AppCompatActivity {
         InstanceClass.CallApi().viewProductUser(sharedPreferences.getInt("uid",0)).enqueue(new Callback<ViewProductData>() {
             @Override
             public void onResponse(Call<ViewProductData> call, Response<ViewProductData> response) {
-                if(response.body().getConnection()==1){
-                    if(response.body().getResult()==1){
-                        adapter = new View_Adapter(Top_Picks.this,response.body().getProductdata());
-                        LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
-                        manager.setOrientation(RecyclerView.VERTICAL);
-                        recyclerView.setLayoutManager(manager);
-                        recyclerView.setAdapter(adapter);
-                        Log.d("TTTT", "onResponse: product data  = "+response.body().getProductdata());
-                    }else {
-                        Log.d("TTTT", "onResponse: responce result not ");
-                    }
-                }else {
-                    Log.d("TTTT", "onResponse: connection error");
+                if(response.body().getConnection() == 1 && response.body().getResult()==1){
+                    adapter = new View_Adapter(Top_Picks.this,response.body().getProductdata());
+                    LinearLayoutManager manager = new LinearLayoutManager(getApplicationContext());
+                    manager.setOrientation(RecyclerView.VERTICAL);
+                    recyclerView.setLayoutManager(manager);
+                    recyclerView.setAdapter(adapter);
+                    Log.d("TTTT", "onResponse: "+response.body().getConnection());
+                }
+                else {
+                    Log.d("TTTT", "onResponse: Connection Failed");
                 }
             }
+
             @Override
             public void onFailure(Call<ViewProductData> call, Throwable t) {
                 Log.e("TTTT", "onFailure: "+t.getLocalizedMessage() );

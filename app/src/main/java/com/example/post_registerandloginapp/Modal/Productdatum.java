@@ -15,12 +15,12 @@ public class Productdatum {
     @SerializedName("PRO_NAME")
     @Expose
     private String proName;
-    @SerializedName("PRO_DES")
-    @Expose
-    private String proDes;
     @SerializedName("PRO_PRICE")
     @Expose
     private String proPrice;
+    @SerializedName("PRO_DES")
+    @Expose
+    private String proDes;
     @SerializedName("PRO_IMAGE")
     @Expose
     private String proImage;
@@ -49,20 +49,20 @@ public class Productdatum {
         this.proName = proName;
     }
 
-    public String getProDes() {
-        return proDes;
-    }
-
-    public void setProDes(String proDes) {
-        this.proDes = proDes;
-    }
-
     public String getProPrice() {
         return proPrice;
     }
 
     public void setProPrice(String proPrice) {
         this.proPrice = proPrice;
+    }
+
+    public String getProDes() {
+        return proDes;
+    }
+
+    public void setProDes(String proDes) {
+        this.proDes = proDes;
     }
 
     public String getProImage() {
@@ -79,8 +79,8 @@ public class Productdatum {
                 "id='" + id + '\'' +
                 ", uid='" + uid + '\'' +
                 ", proName='" + proName + '\'' +
-                ", proDes='" + proDes + '\'' +
                 ", proPrice='" + proPrice + '\'' +
+                ", proDes='" + proDes + '\'' +
                 ", proImage='" + proImage + '\'' +
                 '}';
     }

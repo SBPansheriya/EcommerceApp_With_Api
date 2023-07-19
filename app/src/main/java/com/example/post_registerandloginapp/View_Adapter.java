@@ -19,7 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.example.post_registerandloginapp.Modal.AddProductData;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.post_registerandloginapp.Modal.Productdatum;
 import com.example.post_registerandloginapp.Modal.RegisterData;
 
@@ -34,6 +34,7 @@ public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder>
     Context context;
     List<Productdatum> productdata;
 
+
     public View_Adapter(Context context, List<Productdatum> productdata) {
         this.context = context;
         this.productdata = productdata;
@@ -42,43 +43,68 @@ public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder>
     @NonNull
     @Override
     public View_Adapter.view_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.activity_view_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_view_item, parent, false);
         view_holder holder = new view_holder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull View_Adapter.view_holder holder, @SuppressLint("RecyclerView") int position) {
-        holder.pname.setText(""+productdata.get(position).getProName());
-        holder.pprise.setText(""+productdata.get(position).getProPrice());
-        holder.pdes.setText(""+productdata.get(position).getProDes());
+    public void onBindViewHolder(@NonNull view_holder holder, @SuppressLint("RecyclerView") int position) {
+        holder.pname.setText("Name : " +"" + productdata.get(position).getProName());
+        holder.pprise.setText("Price : " +"" + productdata.get(position).getProPrice());
+        holder.pdes.setText("Des. : " +"" + productdata.get(position).getProDes());
 
-        Glide.with(context)
+//        Glide.with(context)
+//                .load("https://shreyecommerce.000webhostapp.com/MySite/"+productdata.get(position).getProImage())
+//                .centerCrop()
+//                .into(holder.imageView);
+
+        Glide.with(context.getApplicationContext())
                 .load("https://shreyecommerce.000webhostapp.com/MySite/"+productdata.get(position).getProImage())
-                .centerCrop()
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
                 .into(holder.imageView);
+        Log.d("KKK", "onBindViewHolder: " + productdata.get(position).getProImage());
+
+//        Picasso.with(context)
+//                .load("https://shreyecommerce.000webhostapp.com/MySite/"+productdata.get(position).getProImage())
+//                .networkPolicy(NetworkPolicy.NO_CACHE)
+//                .memoryPolicy(MemoryPolicy.NO_CACHE)
+////                .placeholder(R.drawable.placeholder)
+//                .into(holder.imageView);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent intent = new Intent(context, PaymentActivity.class);
+                intent.putExtra("name",productdata.get(position).getProName());
+                intent.putExtra("price",productdata.get(position).getProPrice());
+                context.startActivity(intent);
+                return true;
+            }
+        });
 
         holder.morevert.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("TTT", "onClick: 123234");
-                PopupMenu popupMenu = new PopupMenu(context,v);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu,popupMenu.getMenu());
+                PopupMenu popupMenu = new PopupMenu(context, v);
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        if(item.getItemId()==R.id.update){
+                        if (item.getItemId() == R.id.update) {
                             Intent intent = new Intent(context, Add_Product_Class.class);
-                            intent.putExtra("button","update");
-                            intent.putExtra("id",productdata.get(position).getId());
-                            intent.putExtra("name",productdata.get(position).getProName());
-                            intent.putExtra("price",productdata.get(position).getProPrice());
-                            intent.putExtra("des",productdata.get(position).getProDes());
-                            intent.putExtra("image",productdata.get(position).getProImage());
+                            intent.putExtra("button", "update");
+                            Splash_Image.editor.putString("id", productdata.get(position).getId());
+                            Splash_Image.editor.commit();
+                            intent.putExtra("name", productdata.get(position).getProName());
+                            intent.putExtra("price", productdata.get(position).getProPrice());
+                            intent.putExtra("des", productdata.get(position).getProDes());
+                            intent.putExtra("image", productdata.get(position).getProImage());
                             context.startActivity(intent);
                         }
-                        if(item.getItemId()==R.id.delete){
-                            AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                        if (item.getItemId() == R.id.delete) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(context);
                             builder.setTitle("DELETE...");
                             builder.setMessage("Are You Sure?");
                             builder.setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
@@ -87,26 +113,24 @@ public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder>
                                     InstanceClass.CallApi().deleteProductUser(Integer.valueOf(productdata.get(position).getId())).enqueue(new Callback<RegisterData>() {
                                         @Override
                                         public void onResponse(Call<RegisterData> call, Response<RegisterData> response) {
-                                            if (response.body().getConnection()==1)
-                                            {
-                                                if (response.body().getResult()==1)
-                                                {
+                                            if (response.body().getConnection() == 1) {
+                                                if (response.body().getResult() == 1) {
                                                     Log.d("JJJ", "onResponse: Delete");
                                                     Toast.makeText(context, "Product Deleted", Toast.LENGTH_LONG).show();
-                                                }
-                                                else {
+                                                    productdata.remove(position);
+                                                    notifyDataSetChanged();
+                                                    notifyDataSetChanged();
+                                                } else {
                                                     Toast.makeText(context, "Product Not Deleted", Toast.LENGTH_LONG).show();
                                                 }
-                                            }
-                                            else
-                                            {
-                                                Toast.makeText(context, "Somthin Went Wrong", Toast.LENGTH_LONG).show();
+                                            } else {
+                                                Toast.makeText(context, "Something Went Wrong", Toast.LENGTH_LONG).show();
                                             }
                                         }
 
                                         @Override
                                         public void onFailure(Call<RegisterData> call, Throwable t) {
-                                            Log.e("JJJ", "onFailure: "+t.getLocalizedMessage() );
+                                            Log.e("JJJ", "onFailure: " + t.getLocalizedMessage());
                                         }
                                     });
                                     dialogInterface.dismiss();
@@ -135,8 +159,9 @@ public class View_Adapter extends RecyclerView.Adapter<View_Adapter.view_holder>
     }
 
     public class view_holder extends RecyclerView.ViewHolder {
-        ImageView imageView,morevert;
-        TextView pname,pprise,pdes;
+        ImageView imageView, morevert;
+        TextView pname, pprise, pdes;
+
         public view_holder(@NonNull View itemView) {
             super(itemView);
             morevert = itemView.findViewById(R.id.moreverts);
